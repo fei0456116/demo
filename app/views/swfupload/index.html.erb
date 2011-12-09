@@ -1,3 +1,6 @@
+<div>
+	<input width="120" type="file" height="30" name="Filedata" id="file_upload" style="display: none;">
+</div>
 <%= render :partial => "users/users" %>
 
 <script type="text/javascript">
@@ -21,4 +24,24 @@
 		});
 	}
 	getUsers(1);
+	
+	jQuery(document).ready(function() {
+		$('#file_upload').uploadify({
+			'uploader': "/assets/uploadify.swf",
+			'script': "/users/swfupload", 
+			'cancelImg' : '/assets/gal_del.png',
+			'folder'    : '/uploads',
+			'removeCompleted' : true,
+			'sizeLimit'   : 102400,
+			'auto'        : true,
+			'fileTypeDesc'    : 'Image Files',
+			'fileTypeExts'    : '*.gif;*.jpg;*.png',
+			onUploadComplete : 	function(file,swfuploadifyQueue) {
+				alert('onUploadComplete fired!');
+			}
+		});
+	});
+	
+	
+	
 </script>

@@ -1,6 +1,7 @@
 Demo::Application.routes.draw do
   resources :users do
     collection { post :sort }
+    collection { post :swfupload }
   end
   resources :casts, :only => [:index, :show]
   namespace :admin do

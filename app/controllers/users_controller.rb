@@ -22,6 +22,8 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
+    @user.face = params[:Filedata] if params[:Filedata]
+
     if @user.save
       redirect_to @user, :notice => "Successfully created user."
     else
@@ -36,10 +38,22 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(params[:user])
-      redirect_to @user, :notice  => "Successfully updated user."
+      respond_with do |format|
+        format.html {redirect_to @user, :notice  => "Successfully updated user."}
+        format.js { render :nothing => true}
+      end
     else
-      render :action => 'edit'
+      respond_with do |format|
+        format.html {render :action => 'edit'}
+        format.js { render :nothing => true}
+      end
     end
+  end
+  
+  def swfupload
+    @user = User.new(params[:user])
+    @user.face = params[:Filedata] if params[:Filedata]
+    render :text => '"status":true'
   end
 
   def sort
