@@ -7,3 +7,7 @@
 //= require jquery
 //= require jquery-ui
 //= require jquery_ujs
+//= require jquery.tmpl.min
+//= require jquery.pager
+//= require swfobject
+//= require jquery.uploadify.v2.1.4.min

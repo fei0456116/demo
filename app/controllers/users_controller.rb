@@ -42,6 +42,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def sort
+    params[:user].each_with_index do |id, index|
+      User.update_all({:position => index + 1}, {:id => id} )
+    end
+    render :nothing => true
+  end
+
   def destroy
     @user = User.find(params[:id])
     redirect_to users_url, :notice => "Successfully destroyed user."

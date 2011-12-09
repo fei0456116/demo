@@ -1,0 +1,47 @@
+<% title "Users List Sort" %>
+<style type="text/css">
+	
+</style>
+<a href="#" id='sort'>Click To Sort</a>
+<%= render :partial => "users/users" %>
+
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		$('#sort').live('click', function(event) {
+			$( "#users" ).sortable({
+				update: function(){
+					$.post('/users/sort', $(this).sortable('serialize'));
+					
+				}
+			});
+			$( "#users" ).disableSelection();
+		});
+	});
+	
+
+	function getUsers (pageIndex) {
+		
+		$('#users').fadeOut(400, function() {
+			
+			var container = $(this);
+			container.empty();
+			$.ajax({
+			  url: '/users?page=' + pageIndex,
+			  type: 'GET',
+			  dataType: 'json',
+
+			  success: function(data, textStatus, xhr) {
+			  	var results = $.parseJSON(data.results);
+				$('#users_tmpl').tmpl(results).appendTo(container);
+				container.fadeIn(500);
+			  },
+			  error: function(xhr, textStatus, errorThrown) {
+			  	container.html('something go wrong, try later');
+			  }
+			});
+		});
+	}
+	getUsers(1);
+	
+</script>
+
