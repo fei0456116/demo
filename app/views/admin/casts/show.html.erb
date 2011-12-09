@@ -1,0 +1,20 @@
+<% title "Cast" %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @cast.name %>
+</p>
+<p>
+  <strong>Desc:</strong>
+  <%= @cast.desc %>
+</p>
+<p>
+  <strong>Demo:</strong>
+  <%= @cast.demo %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_cast_path(@cast) %> |
+  <%= link_to "Destroy", @cast, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", casts_path %>
+</p>

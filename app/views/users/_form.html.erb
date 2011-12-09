@@ -1,0 +1,11 @@
+<%= simple_form_for @user, :html => {:multipart => true} do |f| %>
+  	<div class="inputs">
+  		<%= f.error_messages %>
+		<%= f.input :name %>
+		<%= f.input :email %>
+		<%= f.input :face %>
+  	</div>
+  	<div class="button">
+  		<%= f.button :submit %>
+  	</div>
+<% end %>

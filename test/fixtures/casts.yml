@@ -1,0 +1,9 @@
+one:
+  name: MyString
+  desc: MyText
+  demo: MyString
+
+two:
+  name: MyString
+  desc: MyText
+  demo: MyString

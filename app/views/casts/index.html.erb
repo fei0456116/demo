@@ -1,0 +1,8 @@
+<h2>Cast List</h2>
+
+<% @casts.each do |f| %>
+	<div class="casts">
+		<h3><%= f.name %></h3>
+		<p><a href="<%= f.demo %>">查看demo</a></p>
+	</div>
+<% end %>

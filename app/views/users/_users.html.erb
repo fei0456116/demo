@@ -1,0 +1,50 @@
+<% title "Users List By Jquery Tmpl" %>
+<p><%= link_to "New User", new_user_path %></p>
+
+<div id="grid">
+	<div id="pager"><ul class="pages"></ul></div>
+	<ul id="users" class='grid clearfix'></ul>
+</div>
+
+<script id="users_tmpl" type="text/x-jquery-tmpl">
+	<li id='teacher_${id}' style=''>
+		<div class="content">
+			<div class="img">
+				<img src="${url_thumb}" alt="">
+			</div>
+			<div class="">
+				<strong>${name}</strong><br>
+				<a href="/teachers/${id}">查看</a> |
+				<a href="/teachers/${id}/edit">编辑</a> |
+				<a href="#" rel='/teachers/${id}'>删除</a>
+			</div>
+		</div>
+	</li>
+</script>
+
+<script type="text/javascript">
+	function getUsers (pageIndex) {
+		var currentPage = 1,
+			numPages = 0;
+		
+		$('#users').fadeOut(400, function() {
+			$.ajax({
+			  url: '/users?page=' + pageIndex,
+			  type: 'GET',
+			  dataType: 'json',
+
+			  success: function(data, textStatus, xhr) {
+			  	var results = $.parseJSON(data.results);
+				$('#users_tmpl').tmpl(results).appendTo('#users');
+				$('#users').fadeIn(500);
+			  },
+			  error: function(xhr, textStatus, errorThrown) {
+			  	$('#users').html('something go wrong, try later');
+			  }
+			});
+		});
+	}
+	getUsers(1);
+	
+</script>
+

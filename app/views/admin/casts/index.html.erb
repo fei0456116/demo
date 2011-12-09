@@ -1,0 +1,21 @@
+<% title "Casts" %>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Desc</th>
+    <th>Demo</th>
+  </tr>
+  <% for cast in @casts %>
+    <tr>
+      <td><%= cast.name %></td>
+      <td><%= cast.desc %></td>
+      <td><%= cast.demo %></td>
+      <td><%= link_to "Show", admin_casts_path(cast) %></td>
+      <td><%= link_to "Edit", edit_admin_cast_path(cast) %></td>
+      <td><%= link_to "Destroy", admin_casts_path(cast), :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Cast", new_admin_cast_path %></p>
