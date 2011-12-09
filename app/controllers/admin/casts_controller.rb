@@ -1,5 +1,5 @@
 class Admin::CastsController < ApplicationController
-  
+  http_basic_authenticate_with :name => "fei0456116", :password => "Feifei11@"
   def index
     @casts = Cast.all
   end
