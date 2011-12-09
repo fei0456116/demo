@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     respond_with do |format|
       format.html
       format.json { 
-        t = User.order("position").page(params[:page]).per(6)
+        t = User.order("position").page(params[:page]).per(10)
         render  :json => {:results => t.to_json, :pagecount => t.num_pages, :pagenumber => params[:page]}
       }
     end
@@ -44,7 +44,6 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
     redirect_to users_url, :notice => "Successfully destroyed user."
   end
 end

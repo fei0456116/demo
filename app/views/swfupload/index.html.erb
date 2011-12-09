@@ -1,0 +1,24 @@
+<%= render :partial => "users/users" %>
+
+<script type="text/javascript">
+	function getUsers (pageIndex) {
+		$('#users').fadeOut(400, function() {
+			$.ajax({
+			  url: '/pager?page=' + pageIndex,
+			  type: 'GET',
+			  dataType: 'json',
+
+			  success: function(data, textStatus, xhr) {
+			  	var results = $.parseJSON(data.results);
+				$('#users_tmpl').tmpl(results).appendTo($('#users').empty());
+				$('#users').fadeIn(500);
+				$( "#pager" ).pager({ pagenumber: data.pagenumber, pagecount: data.pagecount, buttonClickCallback: getUsers});
+			  },
+			  error: function(xhr, textStatus, errorThrown) {
+			  	$('#users').html('something go wrong, try later');
+			  }
+			});
+		});
+	}
+	getUsers(1);
+</script>

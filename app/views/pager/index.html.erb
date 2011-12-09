@@ -1,32 +1,27 @@
-<% title "Users List By Jquery Tmpl" %>
+<%= render :partial => "users/users" %>
 <script src="/assets/jquery.tmpl.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/assets/jquery.pager.js" type="text/javascript" charset="utf-8"></script>
 
-<%= render :partial => "users" %>
 
 <script type="text/javascript">
 	function getUsers (pageIndex) {
-		
 		$('#users').fadeOut(400, function() {
-			
-			var container = $(this);
-			container.empty();
 			$.ajax({
-			  url: '/users?page=' + pageIndex,
+			  url: '/pager?page=' + pageIndex,
 			  type: 'GET',
 			  dataType: 'json',
 
 			  success: function(data, textStatus, xhr) {
 			  	var results = $.parseJSON(data.results);
-				$('#users_tmpl').tmpl(results).appendTo(container);
-				container.fadeIn(500);
+				$('#users_tmpl').tmpl(results).appendTo($('#users').empty());
+				$('#users').fadeIn(500);
+				$( "#pager" ).pager({ pagenumber: data.pagenumber, pagecount: data.pagecount, buttonClickCallback: getUsers});
 			  },
 			  error: function(xhr, textStatus, errorThrown) {
-			  	container.html('something go wrong, try later');
+			  	$('#users').html('something go wrong, try later');
 			  }
 			});
 		});
 	}
 	getUsers(1);
-	
 </script>
-

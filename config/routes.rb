@@ -1,11 +1,12 @@
 Demo::Application.routes.draw do
-  resources :users
+  get "swfupload/index"
 
+  resources :users
   resources :casts, :only => [:index, :show]
-  
   namespace :admin do
     resources :casts
   end
+  match 'pager' => 'pager#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

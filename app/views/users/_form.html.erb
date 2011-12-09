@@ -4,6 +4,7 @@
 		<%= f.input :name %>
 		<%= f.input :email %>
 		<%= f.input :face %>
+		<%= image_tag @user.face.thumb.url if @user.face.present? %>
   	</div>
   	<div class="button">
   		<%= f.button :submit %>
